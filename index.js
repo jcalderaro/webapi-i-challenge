@@ -11,16 +11,31 @@
 //                                              Returns the modified document, NOT the original.
 
 const express = require('express');
+// Express is the framework that allows us to write backend crud requests more easily.
+// This syntax will always be the same.
+
 const server = express();
+// Express is the framework that allows us to write backend crud requests more easily.
+// This syntax will always be the same.
+
 const db = require('./data/db');
+// Express is the framework that allows us to write backend crud requests more easily.
+// This syntax will always be the same.
 
 server.use(express.json());
+// This line tells the server to use json syntax 
+
+//
+
 
 //
 server.get('/', (req,res) => {
     res.send('server is alive');
 })
 //
+// The Server is doing a Crud operation, in this case, it is Get. Only get something at the '/' url. It will send the Request and at the same
+// it is sending the Response, however the response is a blank box. Which is then filled in by the => { res.send thing.} => ES6 
+// Response.send is a method to define what the response should send, in this case the string (' Server is Alive'); })
 
 //
 server.get('/now', (req,res) => {
@@ -28,6 +43,9 @@ server.get('/now', (req,res) => {
     res.send(now);
 })
 //
+// The Server is also doing a Crud operation, in this case it's a Get. Only accessible on the '/now' url. 
+// You can customize any fucking back slash thing. 
+// Line 43 is sending the response with the variable that was created in line 42 Using the premade Date string. 
 
 //
 server.get('/api/users', (req,res) => {
@@ -45,6 +63,8 @@ server.get('/api/users', (req,res) => {
 //
 server.get('/api/users/:id', (req,res) => {
     const userID = req.params.id;
+    console.log(req);
+
     db.findById(userID)
     .then( user => {
         if (user) {
@@ -72,6 +92,8 @@ server.delete('/api/users/:id', (req,res) => {
     })
 })
 //
+// Sending a delete request to the server at the url. Specify user ID to delete in the url. 
+// Next use the db.remove function with the (userID) db
 
 //
 server.put('/api/users/:id', (req,res) => {
